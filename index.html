@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0045)file:///C:/Users/endou/Downloads/index_3.html -->
+<!-- saved from url=(0045)file:///C:/Users/endou/Downloads/index_4.html -->
 <html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -116,7 +116,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic',sa
   <div class="action-bar">
     <button class="btn-blue" onclick="openTemplateModal()">📋 現場選択</button>
     <button class="btn-orange" onclick="openAddSite()">＋ 現場追加</button>
-    <button class="btn-gray" style="background:#FEF3C7;border-color:#FCD34D;color:#92400E" onclick="openOenModal()">🤝 応援</button>
+    <button class="btn-gray" style="background:#FEF3C7;border-color:#FCD34D;color:#92400E;font-weight:700" onclick="openOenModal()">🤝 応援</button>
+  </div>
+  <div class="action-bar" style="margin-top:-6px">
+    <button class="btn-gray" onclick="addOkusan()" style="background:#FCE4EC;border-color:#F48FB1;color:#880E4F;font-weight:700">👩 奥さん</button>
     <button class="btn-gray" onclick="openPeopleModal()">👤 人員</button>
     <button class="btn-gray" onclick="openResetModal()">🔄 リセット</button>
   </div>
@@ -294,8 +297,6 @@ const DEFAULT_PEOPLE=[
   {id:'p34',name:'ゾー モー テゥ⑭',  cat:'技能実習'},
   {id:'p35',name:'ゾー ナイン ウィン⑮',cat:'技能実習'},
   {id:'p36',name:'レナルディ⑯',      cat:'技能実習'},
-  {id:'p37',name:'遠藤 恵美子',       cat:'事務'},
-  {id:'p38',name:'岡本 一美',         cat:'パート'},
   {id:'p39',name:'中田 一郎',         cat:'一人親方'},
   {id:'p40',name:'金子 真優',         cat:'一人親方'},
   {id:'p41',name:'中山 絢菜',         cat:'一人親方'},
@@ -545,6 +546,30 @@ function tEnd(e){
   touchPid=null;touchSrc=null;dragging=null;dragSrc=null;
 }
 
+// 奥さんをワンタップで追加
+function addOkusan(){
+  const already=state.people.find(p=>p.id==='okusan');
+  if(already){
+    // すでにいる場合は未配置に戻す
+    if(!state.pool.includes('okusan')){
+      // 配置済みの場合は未配置に戻す
+      Object.keys(state.assigns).forEach(sid=>{
+        state.assigns[sid]=state.assigns[sid].filter(i=>i!=='okusan');
+      });
+      state.pool.push('okusan');
+      render();
+      showToast('飯島とし子を未配置に戻しました');
+    } else {
+      showToast('飯島とし子はすでに未配置にいます');
+    }
+    return;
+  }
+  state.people.push({id:'okusan',name:'飯島 とし子',cat:'一人親方'});
+  state.pool.push('okusan');
+  render();
+  showToast('飯島とし子を追加しました');
+}
+
 // ========== 応援モーダル ==========
 function openOenModal(){
   renderOenList();
@@ -752,13 +777,13 @@ function confirmAddPerson(){
 // リセット
 function openResetModal(){document.getElementById('reset-modal').classList.add('show');}
 function resetAssign(){
-  // 応援メンバーを除外して固定メンバーだけ残す
-  state.people=state.people.filter(p=>p.cat!=='応援');
+  // 応援メンバーと奥さんを除外して固定メンバーだけ残す
+  state.people=state.people.filter(p=>p.cat!=='応援' && p.id!=='okusan');
   state.pool=state.people.map(p=>p.id);
   state.sites=[];
   Object.keys(state.assigns).forEach(sid=>state.assigns[sid]=[]);
   Object.keys(state.cars).forEach(sid=>state.cars[sid]='');
-  closeModal('reset-modal');render();showToast('配置と現場をリセットしました（応援メンバーも削除）');
+  closeModal('reset-modal');render();showToast('配置と現場をリセットしました');
 }
 function resetAll(){
   state={
