@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)file:///C:/Users/endou/Downloads/index_7.html -->
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>配車ボード｜飯島工務店</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic',sans-serif;background:#f0f2f5;min-height:100vh}
+#app{max-width:640px;margin:0 auto;padding:10px}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 4px 10px}
+.title{font-size:15px;font-weight:700;color:#1a1a1a}
+.action-bar{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.action-bar button{flex:1;min-width:80px;padding:8px 6px;font-size:12px;font-weight:600;border-radius:8px;cursor:pointer;border:1px solid #ccc}
+.btn-blue{background:#2F5496;color:#fff;border-color:#2F5496}
+.btn-green{background:#06C755;color:#fff;border-color:#06C755}
+.btn-orange{background:#f97316;color:#fff;border-color:#f97316}
+.btn-gray{background:#fff;color:#555}
+.btn-red{background:#e53e3e;color:#fff;border-color:#e53e3e}
+.tabs{display:flex;gap:5px;margin-bottom:12px}
+.tab{flex:1;padding:8px 4px;font-size:12px;font-weight:500;text-align:center;border:1px solid #ccc;border-radius:8px;cursor:pointer;color:#666;background:#fff}
+.tab.active{background:#2F5496;color:#fff;border-color:#2F5496}
+.section-label{font-size:11px;color:#888;font-weight:700;padding:6px 2px 5px;letter-spacing:0.5px}
+.pool-wrap{background:#fff;border:1px solid #ddd;border-radius:10px;padding:8px;min-height:56px;margin-bottom:12px}
+.pool-inner{display:flex;flex-wrap:wrap;gap:6px}
+.sites-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.site-row{background:#fff;border:1px solid #ddd;border-radius:10px;overflow:visible}
+.site-hdr{display:flex;align-items:center;gap:5px;padding:6px 8px;background:#f8f9fa;border-bottom:1px solid #eee;border-radius:10px 10px 0 0}
+.site-time{font-size:11px;font-weight:600;color:#555;min-width:34px}
+.site-name{font-size:13px;font-weight:600;color:#1a1a1a;flex:1}
+.site-car{font-size:11px;color:#185FA5;background:#E6F1FB;border-radius:5px;padding:2px 7px;cursor:pointer;white-space:nowrap}
+.site-count{font-size:11px;color:#888;white-space:nowrap}
+.site-del{font-size:18px;color:#ccc;cursor:pointer;padding:0 2px;line-height:1}
+.site-del:hover{color:#e53e3e}
+.drop-zone{display:flex;flex-wrap:wrap;gap:5px;padding:7px 8px;min-height:44px}
+.drop-zone.over{background:#ddeeff;outline:2px dashed #378ADD;border-radius:0 0 10px 10px}
+.card{display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:500;cursor:grab;user-select:none;touch-action:none;white-space:nowrap;border:1px solid transparent}
+.card:active{cursor:grabbing;opacity:0.6}
+.card.dragging{opacity:0.3}
+.c1{background:#CECBF6;color:#3C3489;border-color:#AFA9EC}
+.c2{background:#9FE1CB;color:#085041;border-color:#5DCAA5}
+.c3{background:#F5C4B3;color:#712B13;border-color:#F0997B}
+.c4{background:#B5D4F4;color:#0C447C;border-color:#85B7EB}
+.c5{background:#C0DD97;color:#27500A;border-color:#97C459}
+.c6{background:#FAC775;color:#633806;border-color:#EF9F27}
+.c7{background:#F4C0D1;color:#72243E;border-color:#ED93B1}
+.c8{background:#D3D1C7;color:#2C2C2A;border-color:#B4B2A9}
+.oen-row{display:flex;align-items:center;gap:8px;padding:7px 8px;border:1px solid #eee;border-radius:8px;background:#fafafa;margin-bottom:5px}
+.oen-name{flex:1;font-size:13px;color:#1a1a1a}
+.oen-input{width:60px;padding:5px 8px;font-size:13px;border:1px solid #ccc;border-radius:6px;text-align:center}
+.oen-unit{font-size:12px;color:#888}
+.oen-del{color:#ddd;cursor:pointer;font-size:18px;line-height:1}
+.oen-del:hover{color:#e53e3e}
+.c9{background:#FEF3C7;color:#92400E;border-color:#FCD34D}
+.overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:flex-start;justify-content:center;padding-top:30px;overflow-y:auto}
+.overlay.show{display:flex}
+.modal{background:#fff;border-radius:14px;padding:18px;width:94%;max-width:420px;max-height:88vh;overflow-y:auto;margin-bottom:20px}
+.modal h3{font-size:15px;font-weight:700;margin-bottom:14px;color:#1a1a1a}
+.modal-btns{display:flex;gap:8px;margin-top:14px}
+.modal-btns button{flex:1;padding:10px;font-size:13px;font-weight:600;border-radius:8px;cursor:pointer;border:1px solid #ccc}
+.btn-ok{background:#2F5496;color:#fff;border-color:#2F5496}
+.btn-cancel2{background:#fff;color:#333}
+.form-row{margin-bottom:12px}
+.form-row label{display:block;font-size:12px;color:#555;margin-bottom:4px;font-weight:600}
+.form-row input{width:100%;padding:9px 10px;font-size:13px;border:1px solid #ccc;border-radius:8px;outline:none}
+.form-row input:focus{border-color:#2F5496}
+
+/* テンプレート選択 */
+.tmpl-section{margin-bottom:14px}
+.tmpl-section-title{font-size:12px;font-weight:700;color:#555;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid #eee}
+.tmpl-grid{display:flex;flex-direction:column;gap:4px}
+.tmpl-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid #eee;border-radius:8px;cursor:pointer;background:#fafafa}
+.tmpl-item:hover{background:#f0f7ff;border-color:#b5d4f4}
+.tmpl-item.checked{background:#E6F1FB;border-color:#2F5496}
+.tmpl-check{width:18px;height:18px;border:2px solid #ccc;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.tmpl-item.checked .tmpl-check{background:#2F5496;border-color:#2F5496;color:#fff;font-size:12px}
+.tmpl-name{flex:1;font-size:13px;color:#1a1a1a}
+.tmpl-time{font-size:11px;color:#888;min-width:32px}
+.tmpl-del-btn{font-size:16px;color:#ddd;cursor:pointer;padding:0 2px}
+.tmpl-del-btn:hover{color:#e53e3e}
+.add-tmpl-row{display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid #eee}
+.add-tmpl-row input{padding:8px;font-size:13px;border:1px solid #ccc;border-radius:8px;outline:none}
+.add-tmpl-row input:focus{border-color:#2F5496}
+.add-tmpl-name{flex:1}
+.add-tmpl-time{width:70px}
+.add-tmpl-btn{padding:8px 12px;background:#2F5496;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+
+/* 車両 */
+.car-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-bottom:4px}
+.car-btn{padding:8px 6px;font-size:12px;text-align:center;border:1px solid #ccc;border-radius:8px;cursor:pointer;color:#1a1a1a;background:#fff}
+.car-btn strong{display:block;font-size:13px}
+.car-type{font-size:10px;color:#888;display:block;margin-top:1px}
+.car-btn.selected{background:#2F5496;color:#fff;border-color:#2F5496}
+.car-btn.selected .car-type{color:#cce}
+
+/* 人員管理 */
+.person-list{display:flex;flex-direction:column;gap:4px;margin-bottom:8px;max-height:280px;overflow-y:auto}
+.person-item{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid #eee;border-radius:8px;background:#fafafa}
+.person-item .pname{flex:1;font-size:13px;color:#1a1a1a}
+.person-item .pcat{font-size:11px;color:#888;min-width:60px}
+.person-del{color:#ccc;cursor:pointer;font-size:18px;line-height:1}
+.person-del:hover{color:#e53e3e}
+.add-person-row{display:flex;gap:6px;margin-top:8px}
+.add-person-row input{flex:1;padding:8px;font-size:13px;border:1px solid #ccc;border-radius:8px}
+.add-person-row select{padding:8px;font-size:12px;border:1px solid #ccc;border-radius:8px}
+
+.line-output{background:#f8f9fa;border:1px solid #ddd;border-radius:8px;padding:12px;font-size:13px;line-height:1.7;white-space:pre-wrap;word-break:break-all;margin-bottom:8px;max-height:300px;overflow-y:auto;color:#1a1a1a}
+.reset-msg{font-size:13px;color:#555;line-height:1.6;margin-bottom:12px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;z-index:2000;opacity:0;transition:opacity 0.3s;white-space:nowrap}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="topbar">
+    <span class="title" id="date-label" onclick="openDateModal()" style="cursor:pointer;border-bottom:1.5px dashed #aaa;padding-bottom:1px" title="タップで日付変更">6月16日（火）  ✎</span>
+    <button class="btn-green" style="padding:8px 14px;font-size:13px;font-weight:600;border-radius:8px;cursor:pointer;border:none" onclick="openLineModal()">📤 LINE送信</button>
+  </div>
+  <div class="action-bar">
+    <button class="btn-blue" onclick="openTemplateModal()">📋 現場選択</button>
+    <button class="btn-orange" onclick="openAddSite()">＋ 現場追加</button>
+    <button class="btn-gray" style="background:#FEF3C7;border-color:#FCD34D;color:#92400E;font-weight:700" onclick="openOenModal()">🤝 応援</button>
+  </div>
+  <div class="action-bar" style="margin-top:-6px">
+    <button class="btn-gray" onclick="openPeopleModal()">👤 人員</button>
+    <button class="btn-gray" onclick="openResetModal()">🔄 リセット</button>
+  </div>
+  <div class="tabs">
+    <div class="tab active" onclick="setTab(0)">全員</div>
+    <div class="tab" onclick="setTab(1)">常用</div>
+    <div class="tab" onclick="setTab(2)">技能実習</div>
+    <div class="tab" onclick="setTab(3)">親方他</div>
+    <div class="tab" onclick="setTab(4)">応援</div>
+  </div>
+  <div class="section-label">未配置メンバー</div>
+  <div class="pool-wrap"><div class="pool-inner" id="pool" ondragover="onOver(event)" ondragleave="onLeave(event)" ondrop="onDrop(event,&#39;pool&#39;)"><div class="card c1" draggable="true" data-pid="p1" data-src="pool">玉江</div><div class="card c1" draggable="true" data-pid="p3" data-src="pool">川合</div><div class="card c1" draggable="true" data-pid="p4" data-src="pool">飯島</div><div class="card c1" draggable="true" data-pid="p5" data-src="pool">野口</div><div class="card c1" draggable="true" data-pid="p6" data-src="pool">渋谷</div><div class="card c1" draggable="true" data-pid="p7" data-src="pool">宮畑</div><div class="card c1" draggable="true" data-pid="p8" data-src="pool">柳沼</div><div class="card c1" draggable="true" data-pid="p9" data-src="pool">村田</div><div class="card c1" draggable="true" data-pid="p10" data-src="pool">島田</div><div class="card c1" draggable="true" data-pid="p11" data-src="pool">田中</div><div class="card c1" draggable="true" data-pid="p12" data-src="pool">久保田</div><div class="card c1" draggable="true" data-pid="p13" data-src="pool">山本</div><div class="card c1" draggable="true" data-pid="p14" data-src="pool">福田</div><div class="card c1" draggable="true" data-pid="p15" data-src="pool">和田</div><div class="card c1" draggable="true" data-pid="p16" data-src="pool">八幡</div><div class="card c1" draggable="true" data-pid="p17" data-src="pool">石田</div><div class="card c6" draggable="true" data-pid="p18" data-src="pool">浅見</div><div class="card c6" draggable="true" data-pid="p19" data-src="pool">長谷川</div><div class="card c6" draggable="true" data-pid="p20" data-src="pool">伊藤</div><div class="card c2" draggable="true" data-pid="p21" data-src="pool">ヒエウ</div><div class="card c2" draggable="true" data-pid="p22" data-src="pool">ロイ</div><div class="card c2" draggable="true" data-pid="p23" data-src="pool">リー</div><div class="card c2" draggable="true" data-pid="p24" data-src="pool">ウー</div><div class="card c2" draggable="true" data-pid="p25" data-src="pool">ピョー</div><div class="card c2" draggable="true" data-pid="p26" data-src="pool">パイン</div><div class="card c2" draggable="true" data-pid="p27" data-src="pool">ニィー</div><div class="card c2" draggable="true" data-pid="p28" data-src="pool">カォー</div><div class="card c2" draggable="true" data-pid="p29" data-src="pool">ジャン</div><div class="card c2" draggable="true" data-pid="p30" data-src="pool">ヘイン</div><div class="card c2" draggable="true" data-pid="p31" data-src="pool">ゾー</div><div class="card c2" draggable="true" data-pid="p32" data-src="pool">ミョー</div><div class="card c2" draggable="true" data-pid="p33" data-src="pool">ジョー</div><div class="card c2" draggable="true" data-pid="p34" data-src="pool">モー</div><div class="card c2" draggable="true" data-pid="p35" data-src="pool">ウィン</div><div class="card c2" draggable="true" data-pid="p36" data-src="pool">レイ</div><div class="card c2" draggable="true" data-pid="p44" data-src="pool">ラカ</div><div class="card c6" draggable="true" data-pid="p39" data-src="pool">中田</div><div class="card c6" draggable="true" data-pid="p40" data-src="pool">真優</div><div class="card c6" draggable="true" data-pid="p41" data-src="pool">中山</div><div class="card c6" draggable="true" data-pid="p42" data-src="pool">根岸</div></div></div>
+  <div class="section-label">本日の現場</div>
+  <div class="sites-list" id="sites"><div style="text-align:center;color:#aaa;padding:24px;font-size:13px;background:#fff;border-radius:10px;border:1px solid #ddd">「📋 現場選択」から今日の現場を選んでください</div></div>
+</div>
+
+<!-- 日付変更モーダル -->
+<div class="overlay" id="date-modal" onclick="bgClose(event,&#39;date-modal&#39;)">
+  <div class="modal">
+    <h3>📅 日付を変更</h3>
+    <div class="form-row">
+      <label>送信する日付を選んでください</label>
+      <input type="date" id="date-input" style="width:100%;padding:9px 10px;font-size:15px;border:1px solid #ccc;border-radius:8px;outline:none">
+    </div>
+    <div class="modal-btns">
+      <button class="btn-cancel2" onclick="closeModal(&#39;date-modal&#39;)">キャンセル</button>
+      <button class="btn-ok" onclick="confirmDate()">決定</button>
+    </div>
+  </div>
+</div>
+
+<!-- 応援モーダル -->
+<div class="overlay" id="oen-modal" onclick="bgClose(event,&#39;oen-modal&#39;)">
+  <div class="modal">
+    <h3>🤝 応援メンバー追加</h3>
+    <p style="font-size:12px;color:#888;margin-bottom:12px">会社を選んで人数を入力してください</p>
+    <div id="oen-company-list"></div>
+    <div class="add-tmpl-row" style="margin-top:10px;padding-top:10px;border-top:1px solid #eee">
+      <input class="add-tmpl-name" type="text" id="new-oen-company" placeholder="新しい会社名">
+      <button class="add-tmpl-btn" onclick="addOenCompany()">登録</button>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-cancel2" onclick="closeModal(&#39;oen-modal&#39;)">閉じる</button>
+      <button class="btn-ok" onclick="confirmOen()">追加</button>
+    </div>
+  </div>
+</div>
+
+<!-- テンプレートモーダル -->
+<div class="overlay" id="tmpl-modal" onclick="bgClose(event,&#39;tmpl-modal&#39;)">
+  <div class="modal">
+    <h3>📋 現場を選ぶ</h3>
+    <div id="tmpl-list"></div>
+    <div class="add-tmpl-row">
+      <input class="add-tmpl-name" type="text" id="new-tmpl-name" placeholder="新しい現場名">
+      <input class="add-tmpl-time" type="text" id="new-tmpl-time" placeholder="時間">
+      <button class="add-tmpl-btn" onclick="addTemplate()">登録</button>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-cancel2" onclick="closeModal(&#39;tmpl-modal&#39;)">キャンセル</button>
+      <button class="btn-ok" onclick="confirmTemplate()">追加する</button>
+    </div>
+  </div>
+</div>
+
+<!-- 現場追加モーダル（手入力） -->
+<div class="overlay" id="site-modal" onclick="bgClose(event,&#39;site-modal&#39;)">
+  <div class="modal">
+    <h3>現場を手入力で追加</h3>
+    <div class="form-row"><label>現場名</label><input type="text" id="new-site-name" placeholder="例：冨岡 IHI"></div>
+    <div class="form-row"><label>出発時間</label><input type="text" id="new-site-time" placeholder="例：6:30"></div>
+    <div class="modal-btns">
+      <button class="btn-cancel2" onclick="closeModal(&#39;site-modal&#39;)">キャンセル</button>
+      <button class="btn-ok" onclick="confirmAddSite()">追加</button>
+    </div>
+  </div>
+</div>
+
+<!-- 車両モーダル -->
+<div class="overlay" id="car-modal" onclick="bgClose(event,&#39;car-modal&#39;)">
+  <div class="modal">
+    <h3 id="car-modal-title">車両を選択</h3>
+    <div class="car-grid" id="car-grid"></div>
+    <div class="modal-btns">
+      <button class="btn-cancel2" onclick="closeModal(&#39;car-modal&#39;)">キャンセル</button>
+      <button class="btn-ok" onclick="confirmCar()">決定</button>
+    </div>
+  </div>
+</div>
+
+<!-- 人員管理モーダル -->
+<div class="overlay" id="people-modal" onclick="bgClose(event,&#39;people-modal&#39;)">
+  <div class="modal">
+    <h3>👤 人員管理</h3>
+    <div class="person-list" id="person-list"></div>
+    <div class="add-person-row">
+      <input type="text" id="new-person-name" placeholder="名前">
+      <select id="new-person-cat">
+        <option value="常用">常用</option>
+        <option value="技能実習">技能実習</option>
+        <option value="一人親方">一人親方</option>
+        <option value="事務">事務</option>
+        <option value="パート">パート</option>
+      </select>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-cancel2" onclick="closeModal(&#39;people-modal&#39;)">閉じる</button>
+      <button class="btn-ok" onclick="confirmAddPerson()">追加</button>
+    </div>
+  </div>
+</div>
+
+<!-- リセットモーダル -->
+<div class="overlay" id="reset-modal" onclick="bgClose(event,&#39;reset-modal&#39;)">
+  <div class="modal">
+    <h3>🔄 リセット</h3>
+    <p class="reset-msg">何をリセットしますか？</p>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <button class="btn-gray" style="padding:10px;font-size:13px;font-weight:600;border-radius:8px;cursor:pointer;border:1px solid #ccc" onclick="resetAssign()">配置だけリセット（人員・現場テンプレは残す）</button>
+      <button class="btn-red" style="padding:10px;font-size:13px;font-weight:600;border-radius:8px;cursor:pointer;border:none" onclick="resetAll()">全部リセット</button>
+      <button class="btn-cancel2" style="padding:10px;font-size:13px;border-radius:8px;cursor:pointer;border:1px solid #ccc;margin-top:4px" onclick="closeModal(&#39;reset-modal&#39;)">キャンセル</button>
+    </div>
+  </div>
+</div>
+
+<!-- LINE出力モーダル -->
+<div class="overlay" id="line-modal" onclick="bgClose(event,&#39;line-modal&#39;)">
+  <div class="modal">
+    <h3>📤 LINE送信用テキスト</h3>
+    <div class="line-output" id="line-output"></div>
+    <div class="modal-btns">
+      <button class="btn-cancel2" onclick="closeModal(&#39;line-modal&#39;)">閉じる</button>
+      <button class="btn-ok" onclick="copyLine()">コピー</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">全てリセットしました</div>
+
+<script>
+const DEFAULT_PEOPLE=[
+  {id:'p1', name:'玉江',          cat:'常用',    color:'c1'},
+  {id:'p3', name:'川合',          cat:'常用',    color:'c1'},
+  {id:'p4', name:'飯島',            cat:'常用',    color:'c1'},
+  {id:'p5', name:'野口',            cat:'常用',    color:'c1'},
+  {id:'p6', name:'渋谷',          cat:'常用',    color:'c1'},
+  {id:'p7', name:'宮畑',          cat:'常用',    color:'c1'},
+  {id:'p8', name:'柳沼',          cat:'常用',    color:'c1'},
+  {id:'p9', name:'村田',            cat:'常用',    color:'c1'},
+  {id:'p10',name:'島田',          cat:'常用',    color:'c1'},
+  {id:'p11',name:'田中',            cat:'常用',    color:'c1'},
+  {id:'p12',name:'久保田',        cat:'常用',    color:'c1'},
+  {id:'p13',name:'山本',          cat:'常用',    color:'c1'},
+  {id:'p14',name:'福田',            cat:'常用',    color:'c1'},
+  {id:'p15',name:'和田',          cat:'常用',    color:'c1'},
+  {id:'p16',name:'八幡',          cat:'常用',    color:'c1'},
+  {id:'p17',name:'石田',          cat:'常用',    color:'c1'},
+  {id:'p18',name:'浅見',          cat:'一人親方',color:'c6'},
+  {id:'p19',name:'長谷川',          cat:'一人親方',color:'c6'},
+  {id:'p20',name:'伊藤',          cat:'一人親方',color:'c6'},
+  {id:'p21',name:'ヒエウ',  cat:'技能実習',color:'c2'},
+  {id:'p22',name:'ロイ',  cat:'技能実習',color:'c2'},
+  {id:'p23',name:'リー',  cat:'技能実習',color:'c2'},
+  {id:'p24',name:'ウー',   cat:'技能実習',color:'c2'},
+  {id:'p25',name:'ピョー',  cat:'技能実習',color:'c2'},
+  {id:'p26',name:'パイン',cat:'技能実習',color:'c2'},
+  {id:'p27',name:'ニィー',  cat:'技能実習',color:'c2'},
+  {id:'p28',name:'カォー',    cat:'技能実習',color:'c2'},
+  {id:'p29',name:'ジャン',cat:'技能実習',color:'c2'},
+  {id:'p30',name:'ヘイン',      cat:'技能実習',color:'c2'},
+  {id:'p31',name:'ゾー',      cat:'技能実習',color:'c2'},
+  {id:'p32',name:'ミョー',  cat:'技能実習',color:'c2'},
+  {id:'p33',name:'ジョー',cat:'技能実習',color:'c2'},
+  {id:'p34',name:'モー',   cat:'技能実習',color:'c2'},
+  {id:'p35',name:'ウィン',cat:'技能実習',color:'c2'},
+  {id:'p36',name:'レイ',       cat:'技能実習',color:'c2'},
+  {id:'p44',name:'ラカ',        cat:'技能実習',color:'c2'},
+  {id:'p39',name:'中田',          cat:'一人親方',color:'c6'},
+  {id:'p40',name:'真優',          cat:'一人親方',color:'c6'},
+  {id:'p41',name:'中山',          cat:'一人親方',color:'c6'},
+  {id:'p42',name:'根岸',        cat:'一人親方',color:'c6'},
+];
+
+const DEFAULT_TEMPLATES=[
+  {id:'t1', name:'児玉 TAKUTANO',       time:'5:10'},
+  {id:'t2', name:'本庄橋脚',             time:'6:30'},
+  {id:'t3', name:'山城運送',             time:'6:30'},
+  {id:'t4', name:'林志工務店 応援',      time:'6:20'},
+  {id:'t5', name:'冨岡 IMI',             time:'6:15'},
+  {id:'t6', name:'坂戸 ひまわり幼稚園', time:'7:30'},
+  {id:'t7', name:'熊谷 KGM',             time:'6:30'},
+  {id:'t8', name:'上板橋',               time:'6:40'},
+  {id:'t9', name:'軽井沢 雲場',          time:'6:40'},
+  {id:'t10',name:'フージャース軽井沢 西',time:''},
+  {id:'t11',name:'冨岡 IHI',             time:'6:30'},
+  {id:'t12',name:'川島 いちじくの里',   time:'6:20'},
+  {id:'t13',name:'西部酪農乳業',         time:'6:30'},
+  {id:'t14',name:'東秩父村',             time:'5:45'},
+  {id:'t15',name:'伊勢崎 オフィスあずさ',time:'6:30'},
+  {id:'t16',name:'埼玉りそな',           time:'6:20'},
+  {id:'t17',name:'沼田 3K-Pj',           time:'6:30'},
+  {id:'t18',name:'八王子 陸運局',        time:'7:00'},
+  {id:'t19',name:'前橋 吉田運輸倉庫',   time:'6:20'},
+  {id:'t20',name:'フージャース軽井沢 南',time:''},
+  {id:'t21',name:'高崎 タルヤ 清水インダストリー',time:''},
+  {id:'t22',name:'タダック',             time:'7:30'},
+  {id:'t23',name:'ベニヤ割き',           time:'7:30'},
+  {id:'t24',name:'加工場',               time:'7:30'},
+  {id:'t25',name:'雄明工務店 応援 東秩父村',time:''},
+  {id:'t26',name:'高崎 近代美術館',      time:''},
+  {id:'t27',name:'熊谷 亀井産業',        time:''},
+  {id:'t28',name:'小バラシ',             time:''},
+  {id:'t29',name:'パイプ片付け',         time:''},
+  {id:'t30',name:'サポート片付け',       time:''},
+  {id:'t31',name:'桟木片付け',           time:''},
+  {id:'t32',name:'ベニヤ整理',           time:''},
+];
+
+const CARS=[
+  {num:'168',type:'ハイエース'},{num:'1795',type:'ハイエース'},
+  {num:'1844',type:'ハイエース'},{num:'3689',type:'ハイエース'},
+  {num:'18',type:'軽バス'},{num:'2020',type:'ハイエース'},
+  {num:'2021',type:'ハイエース禁煙'},{num:'3311',type:'ハイエース禁煙'},
+  {num:'2293',type:'2t'},{num:'2501',type:'3t禁煙'},
+  {num:'4415',type:'3tユニック'},{num:'2896',type:'4t'},
+  {num:'8220',type:'4t'},{num:'5202',type:'Wキャブ禁煙'},
+  {num:'8594',type:'Wキャブ'},{num:'88',type:'ダンプ'},
+  {num:'黄色',type:'ヤンマー'},{num:'緑',type:'ヤンマー'},
+  {num:'2509',type:'8t'},{num:'4026',type:'8t'},
+  {num:'4964',type:'8t'},{num:'5243',type:'8t'},
+  {num:'3616',type:'プリウス'},{num:'6616',type:'プリウス'},
+  {num:'2022',type:'軽トラ'},
+];
+
+const DEFAULT_COMPANIES=[
+  '枠屋XXX','雄明工務店','及川建設','祐建','宮畑工務店',
+  'LGフレーム','ちとせ工業','青木工務店','高梁建設',
+];
+
+function catColor(cat){
+  if(cat==='常用') return 'c1';
+  if(cat==='技能実習') return 'c2';
+  if(cat==='一人親方') return 'c6';
+  if(cat==='パート') return 'c7';
+  if(cat==='応援') return 'c9';
+  return 'c8';
+}
+
+function loadState(){
+  try{ const s=localStorage.getItem('haisha_v2'); if(s) return JSON.parse(s); }catch(e){}
+  return null;
+}
+function saveState(){
+  try{ localStorage.setItem('haisha_v2',JSON.stringify(state)); }catch(e){}
+}
+
+const saved=loadState();
+let state;
+if(saved&&saved.people){
+  state=saved;
+  if(!state.templates) state.templates=DEFAULT_TEMPLATES.map(t=>({...t}));
+  if(!state.companies) state.companies=[...DEFAULT_COMPANIES];
+} else {
+  state={
+    people:DEFAULT_PEOPLE.map(p=>({...p})),
+    templates:DEFAULT_TEMPLATES.map(t=>({...t})),
+    companies:[...DEFAULT_COMPANIES],
+    sites:[],
+    pool:DEFAULT_PEOPLE.map(p=>p.id),
+    assigns:{},
+    cars:{},
+  };
+}
+
+let dragging=null,dragSrc=null,touchClone=null,touchSrc=null,touchPid=null;
+let currentTab=0,modalSite=null,modalCar=null;
+let tmplSelected=new Set();
+
+const weeks=['日','月','火','水','木','金','土'];
+let selectedDate=new Date();
+
+function formatDate(d){
+  return `${d.getMonth()+1}月${d.getDate()}日（${weeks[d.getDay()]}）`;
+}
+function updateDateLabel(){
+  document.getElementById('date-label').textContent=formatDate(selectedDate)+'  ✎';
+}
+updateDateLabel();
+
+function openDateModal(){
+  // 今の日付をinputにセット
+  const y=selectedDate.getFullYear();
+  const m=String(selectedDate.getMonth()+1).padStart(2,'0');
+  const d=String(selectedDate.getDate()).padStart(2,'0');
+  document.getElementById('date-input').value=`${y}-${m}-${d}`;
+  document.getElementById('date-modal').classList.add('show');
+}
+function confirmDate(){
+  const val=document.getElementById('date-input').value;
+  if(!val){closeModal('date-modal');return;}
+  const parts=val.split('-');
+  selectedDate=new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2]));
+  updateDateLabel();
+  closeModal('date-modal');
+  showToast(formatDate(selectedDate)+'に変更しました');
+}
+
+function setTab(t){
+  currentTab=t;
+  document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',i===t));
+  renderPool();
+}
+function visiblePeople(){
+  if(currentTab===0) return state.people.filter(p=>p.cat!=='事務'&&p.cat!=='パート');
+  const f=[null,'常用','技能実習',['一人親方'],'応援'][currentTab];
+  if(f==='応援') return state.people.filter(p=>p.cat==='応援');
+  return state.people.filter(p=>Array.isArray(f)?f.includes(p.cat):p.cat===f);
+}
+function render(){renderPool();renderSites();saveState();}
+
+function renderPool(){
+  const el=document.getElementById('pool');
+  el.innerHTML='';
+  const ids=new Set(state.pool);
+  const vis=visiblePeople().filter(p=>ids.has(p.id));
+  if(!vis.length){el.innerHTML='<span class="empty-hint">全員配置済み</span>';return;}
+  vis.forEach(p=>el.appendChild(makeCard(p,'pool')));
+}
+function renderSites(){
+  const el=document.getElementById('sites');
+  el.innerHTML='';
+  if(!state.sites.length){
+    el.innerHTML='<div style="text-align:center;color:#aaa;padding:24px;font-size:13px;background:#fff;border-radius:10px;border:1px solid #ddd">「📋 現場選択」から今日の現場を選んでください</div>';
+    return;
+  }
+  state.sites.forEach(site=>{
+    const assigned=state.assigns[site.id]||[];
+    const car=state.cars[site.id]||'';
+    const row=document.createElement('div');
+    row.className='site-row';
+    row.innerHTML=`
+      <div class="site-hdr">
+        <span class="site-time">${site.time||'—'}</span>
+        <span class="site-name">${site.name}</span>
+        <span class="site-car" onclick="openCarModal('${site.id}')">${car||'車両+'}</span>
+        <span class="site-count">${assigned.length}人</span>
+        <span class="site-del" onclick="deleteSite('${site.id}')">×</span>
+      </div>
+      <div class="drop-zone" id="dz-${site.id}"
+        ondragover="onOver(event)" ondragleave="onLeave(event)" ondrop="onDrop(event,'${site.id}')">
+        ${assigned.length===0?'<span class="empty-hint">ここへドラッグ</span>':''}
+      </div>`;
+    el.appendChild(row);
+    const dz=row.querySelector(`#dz-${site.id}`);
+    assigned.forEach(pid=>{
+      const p=state.people.find(x=>x.id===pid);
+      if(p) dz.appendChild(makeCard(p,site.id));
+    });
+  });
+}
+
+function makeCard(p,src){
+  const d=document.createElement('div');
+  d.className=`card ${catColor(p.cat)}`;
+  d.draggable=true;d.dataset.pid=p.id;d.dataset.src=src;
+  d.textContent=p.name;
+  d.addEventListener('dragstart',e=>{dragging=p.id;dragSrc=src;d.classList.add('dragging');e.dataTransfer.effectAllowed='move';});
+  d.addEventListener('dragend',()=>{d.classList.remove('dragging');dragging=null;dragSrc=null;});
+  d.addEventListener('touchstart',tStart,{passive:false});
+  d.addEventListener('touchmove',tMove,{passive:false});
+  d.addEventListener('touchend',tEnd);
+  return d;
+}
+function onOver(e){e.preventDefault();e.currentTarget.classList.add('over');}
+function onLeave(e){e.currentTarget.classList.remove('over');}
+function onDrop(e,tid){
+  e.preventDefault();e.currentTarget.classList.remove('over');
+  if(!dragging||dragSrc===tid)return;
+  move(dragging,dragSrc,tid);
+}
+function move(pid,from,to){
+  if(from==='pool') state.pool=state.pool.filter(i=>i!==pid);
+  else{state.assigns[from]=state.assigns[from]||[];state.assigns[from]=state.assigns[from].filter(i=>i!==pid);}
+  if(to==='pool') state.pool.push(pid);
+  else{state.assigns[to]=state.assigns[to]||[];state.assigns[to].push(pid);}
+  render();
+}
+function tStart(e){
+  e.preventDefault();
+  const card=e.currentTarget;
+  touchPid=card.dataset.pid;touchSrc=card.dataset.src;
+  dragging=touchPid;dragSrc=touchSrc;
+  const p=state.people.find(x=>x.id===touchPid);
+  touchClone=card.cloneNode(true);
+  touchClone.style.cssText=`position:fixed;opacity:.85;pointer-events:none;z-index:9999;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:500;white-space:nowrap;`;
+  touchClone.className=`card ${catColor(p.cat)}`;
+  document.body.appendChild(touchClone);
+  const t=e.touches[0];
+  touchClone.style.left=(t.clientX-50)+'px';touchClone.style.top=(t.clientY-18)+'px';
+  card.classList.add('dragging');
+}
+function tMove(e){
+  e.preventDefault();if(!touchClone)return;
+  const t=e.touches[0];
+  touchClone.style.left=(t.clientX-50)+'px';touchClone.style.top=(t.clientY-18)+'px';
+  document.querySelectorAll('.drop-zone,#pool').forEach(el=>el.classList.remove('over'));
+  const hit=document.elementFromPoint(t.clientX,t.clientY);
+  if(hit){const z=hit.closest('.drop-zone,#pool');if(z)z.classList.add('over');}
+}
+function tEnd(e){
+  if(touchClone){touchClone.remove();touchClone=null;}
+  document.querySelectorAll('.drop-zone,#pool').forEach(el=>el.classList.remove('over'));
+  const t=e.changedTouches[0];
+  const hit=document.elementFromPoint(t.clientX,t.clientY);
+  document.querySelectorAll('.card.dragging').forEach(c=>c.classList.remove('dragging'));
+  if(hit){
+    const z=hit.closest('.drop-zone,#pool');
+    if(z){
+      let tid='pool';
+      if(z.id&&z.id.startsWith('dz-'))tid=z.id.replace('dz-','');
+      if(tid!==touchSrc)move(touchPid,touchSrc,tid);
+    }
+  }
+  touchPid=null;touchSrc=null;dragging=null;dragSrc=null;
+}
+
+// 奥さんをワンタップで追加
+function addOkusan(){
+  const already=state.people.find(p=>p.id==='okusan');
+  if(already){
+    // すでにいる場合は未配置に戻す
+    if(!state.pool.includes('okusan')){
+      // 配置済みの場合は未配置に戻す
+      Object.keys(state.assigns).forEach(sid=>{
+        state.assigns[sid]=state.assigns[sid].filter(i=>i!=='okusan');
+      });
+      state.pool.push('okusan');
+      render();
+      showToast('飯島とし子を未配置に戻しました');
+    } else {
+      showToast('飯島とし子はすでに未配置にいます');
+    }
+    return;
+  }
+  state.people.push({id:'okusan',name:'とし子',cat:'一人親方'});
+  state.pool.push('okusan');
+  render();
+  showToast('飯島とし子を追加しました');
+}
+
+// ========== 応援モーダル ==========
+function openOenModal(){
+  renderOenList();
+  document.getElementById('new-oen-company').value='';
+  document.getElementById('oen-modal').classList.add('show');
+}
+function renderOenList(){
+  const el=document.getElementById('oen-company-list');
+  el.innerHTML='';
+  state.companies.forEach((company,i)=>{
+    const row=document.createElement('div');
+    row.className='oen-row';
+    row.innerHTML=`
+      <span class="oen-name">${company}</span>
+      <input class="oen-input" type="number" min="0" max="20" value="0" id="oen-count-${i}" placeholder="0">
+      <span class="oen-unit">人</span>
+      <span class="oen-del" onclick="deleteOenCompany(${i})">×</span>`;
+    el.appendChild(row);
+  });
+}
+function addOenCompany(){
+  const name=document.getElementById('new-oen-company').value.trim();
+  if(!name){showToast('会社名を入力してください');return;}
+  state.companies.push(name);
+  document.getElementById('new-oen-company').value='';
+  saveState();
+  renderOenList();
+  showToast(name+'を登録しました');
+}
+function deleteOenCompany(i){
+  state.companies.splice(i,1);
+  saveState();
+  renderOenList();
+}
+function confirmOen(){
+  let added=0;
+  state.companies.forEach((company,i)=>{
+    const input=document.getElementById(`oen-count-${i}`);
+    const count=parseInt(input?.value||0);
+    if(count<=0)return;
+    for(let n=1;n<=count;n++){
+      const pid='oen_'+Date.now()+'_'+i+'_'+n;
+      const person={id:pid,name:`${company} ${n}人目`,cat:'応援'};
+      state.people.push(person);
+      state.pool.push(pid);
+      added++;
+    }
+  });
+  if(added===0){showToast('人数を入力してください');return;}
+  closeModal('oen-modal');
+  render();
+  showToast(`応援メンバー${added}名を追加しました`);
+}
+
+// ========== テンプレートモーダル ==========
+function openTemplateModal(){
+  tmplSelected=new Set();
+  renderTmplList();
+  document.getElementById('new-tmpl-name').value='';
+  document.getElementById('new-tmpl-time').value='';
+  document.getElementById('tmpl-modal').classList.add('show');
+}
+function renderTmplList(){
+  const el=document.getElementById('tmpl-list');
+  el.innerHTML='';
+  // 現場名の頭文字でグループ分け（時間あり・なし）
+  const withTime=state.templates.filter(t=>t.time);
+  const noTime=state.templates.filter(t=>!t.time);
+  if(withTime.length){
+    const sec=document.createElement('div');sec.className='tmpl-section';
+    sec.innerHTML='<div class="tmpl-section-title">時間指定あり</div>';
+    const grid=document.createElement('div');grid.className='tmpl-grid';
+    withTime.forEach(t=>grid.appendChild(makeTmplItem(t)));
+    sec.appendChild(grid);el.appendChild(sec);
+  }
+  if(noTime.length){
+    const sec=document.createElement('div');sec.className='tmpl-section';
+    sec.innerHTML='<div class="tmpl-section-title">加工・片付けなど</div>';
+    const grid=document.createElement('div');grid.className='tmpl-grid';
+    noTime.forEach(t=>grid.appendChild(makeTmplItem(t)));
+    sec.appendChild(grid);el.appendChild(sec);
+  }
+}
+function makeTmplItem(t){
+  const item=document.createElement('div');
+  item.className='tmpl-item'+(tmplSelected.has(t.id)?' checked':'');
+  item.dataset.tid=t.id;
+  item.innerHTML=`
+    <div class="tmpl-check">${tmplSelected.has(t.id)?'✓':''}</div>
+    <span class="tmpl-name">${t.name}</span>
+    <span class="tmpl-time">${t.time||''}</span>
+    <span class="tmpl-del-btn" onclick="deleteTemplate(event,'${t.id}')">×</span>`;
+  item.addEventListener('click',()=>toggleTmpl(t.id));
+  return item;
+}
+function toggleTmpl(tid){
+  if(tmplSelected.has(tid)) tmplSelected.delete(tid);
+  else tmplSelected.add(tid);
+  renderTmplList();
+}
+function addTemplate(){
+  const name=document.getElementById('new-tmpl-name').value.trim();
+  const time=document.getElementById('new-tmpl-time').value.trim();
+  if(!name){showToast('現場名を入力してください');return;}
+  const tid='t_'+Date.now();
+  state.templates.push({id:tid,name,time});
+  document.getElementById('new-tmpl-name').value='';
+  document.getElementById('new-tmpl-time').value='';
+  saveState();
+  renderTmplList();
+  showToast('テンプレートに登録しました');
+}
+function deleteTemplate(e,tid){
+  e.stopPropagation();
+  state.templates=state.templates.filter(t=>t.id!==tid);
+  tmplSelected.delete(tid);
+  saveState();
+  renderTmplList();
+}
+function confirmTemplate(){
+  if(!tmplSelected.size){showToast('現場を選んでください');return;}
+  tmplSelected.forEach(tid=>{
+    const tmpl=state.templates.find(t=>t.id===tid);
+    if(!tmpl)return;
+    const sid='s'+Date.now()+'_'+tid;
+    state.sites.push({id:sid,name:tmpl.name,time:tmpl.time});
+    state.assigns[sid]=[];state.cars[sid]='';
+  });
+  closeModal('tmpl-modal');
+  render();
+  showToast(`${tmplSelected.size}件の現場を追加しました`);
+}
+
+// 手入力で現場追加
+function openAddSite(){
+  document.getElementById('new-site-name').value='';
+  document.getElementById('new-site-time').value='';
+  document.getElementById('site-modal').classList.add('show');
+  setTimeout(()=>document.getElementById('new-site-name').focus(),100);
+}
+function confirmAddSite(){
+  const name=document.getElementById('new-site-name').value.trim();
+  const time=document.getElementById('new-site-time').value.trim();
+  if(!name){showToast('現場名を入力してください');return;}
+  const sid='s'+Date.now();
+  state.sites.push({id:sid,name,time});
+  state.assigns[sid]=[];state.cars[sid]='';
+  closeModal('site-modal');render();
+  showToast('現場を追加しました');
+}
+function deleteSite(sid){
+  (state.assigns[sid]||[]).forEach(pid=>{if(!state.pool.includes(pid))state.pool.push(pid);});
+  state.sites=state.sites.filter(s=>s.id!==sid);
+  delete state.assigns[sid];delete state.cars[sid];
+  render();showToast('現場を削除しました');
+}
+
+// 車両
+function openCarModal(sid){
+  modalSite=sid;modalCar=state.cars[sid]||null;
+  const site=state.sites.find(s=>s.id===sid);
+  document.getElementById('car-modal-title').textContent=(site?site.name:'')+'　車両選択';
+  const grid=document.getElementById('car-grid');grid.innerHTML='';
+  CARS.forEach(c=>{
+    const btn=document.createElement('div');
+    btn.className='car-btn'+(modalCar===c.num?' selected':'');
+    btn.innerHTML=`<strong>${c.num}</strong><span class="car-type">${c.type}</span>`;
+    btn.onclick=()=>{modalCar=c.num;grid.querySelectorAll('.car-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');};
+    grid.appendChild(btn);
+  });
+  document.getElementById('car-modal').classList.add('show');
+}
+function confirmCar(){
+  if(modalSite)state.cars[modalSite]=modalCar||'';
+  closeModal('car-modal');render();
+}
+
+// 人員管理
+function openPeopleModal(){renderPersonList();document.getElementById('people-modal').classList.add('show');}
+function renderPersonList(){
+  const el=document.getElementById('person-list');el.innerHTML='';
+  state.people.forEach(p=>{
+    const row=document.createElement('div');row.className='person-item';
+    row.innerHTML=`<span class="pname">${p.name}</span><span class="pcat">${p.cat}</span><span class="person-del" onclick="deletePerson('${p.id}')">×</span>`;
+    el.appendChild(row);
+  });
+}
+function deletePerson(pid){
+  state.pool=state.pool.filter(i=>i!==pid);
+  Object.keys(state.assigns).forEach(sid=>{state.assigns[sid]=state.assigns[sid].filter(i=>i!==pid);});
+  state.people=state.people.filter(p=>p.id!==pid);
+  renderPersonList();render();
+}
+function confirmAddPerson(){
+  const name=document.getElementById('new-person-name').value.trim();
+  const cat=document.getElementById('new-person-cat').value;
+  if(!name){showToast('名前を入力してください');return;}
+  const pid='p_'+Date.now();
+  state.people.push({id:pid,name,cat});
+  state.pool.push(pid);
+  document.getElementById('new-person-name').value='';
+  renderPersonList();render();showToast(name+'を追加しました');
+}
+
+// リセット
+function openResetModal(){document.getElementById('reset-modal').classList.add('show');}
+function resetAssign(){
+  // 応援メンバーと奥さんを除外して固定メンバーだけ残す
+  state.people=state.people.filter(p=>p.cat!=='応援' && p.id!=='okusan');
+  state.pool=state.people.map(p=>p.id);
+  state.sites=[];
+  Object.keys(state.assigns).forEach(sid=>state.assigns[sid]=[]);
+  Object.keys(state.cars).forEach(sid=>state.cars[sid]='');
+  closeModal('reset-modal');render();showToast('配置と現場をリセットしました');
+}
+function resetAll(){
+  state={
+    people:DEFAULT_PEOPLE.map(p=>({...p})),
+    templates:DEFAULT_TEMPLATES.map(t=>({...t})),
+    sites:[],pool:DEFAULT_PEOPLE.map(p=>p.id),assigns:{},cars:{},
+  };
+  closeModal('reset-modal');render();showToast('全てリセットしました');
+}
+
+// LINE
+function openLineModal(){
+  const d=formatDate(selectedDate);
+  let txt=`📋 ${d} 配車表\n`;
+  let hasData=false;
+  state.sites.forEach(site=>{
+    const pids=state.assigns[site.id]||[];
+    if(!pids.length)return;
+    hasData=true;
+    const names=pids.map(pid=>{const p=state.people.find(x=>x.id===pid);return p?p.name:'';}).filter(Boolean).join('・');
+    const car=state.cars[site.id]||'';
+    txt+=`\n【${site.time?site.time+' ':''}${site.name}】${car?' ('+car+')':''}\n${names}\n`;
+  });
+  if(!hasData){showToast('まだ誰も配置されていません');return;}
+  if(state.pool.length){
+    const u=state.pool.map(pid=>{const p=state.people.find(x=>x.id===pid);return p?p.name:'';}).filter(Boolean);
+    if(u.length)txt+=`\n【未配置】\n${u.join('・')}`;
+  }
+  document.getElementById('line-output').textContent=txt;
+  document.getElementById('line-modal').classList.add('show');
+}
+function copyLine(){
+  const txt=document.getElementById('line-output').textContent;
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(()=>showToast('コピーしました！LINEに貼り付けてください')).catch(()=>fallbackCopy(txt));
+  } else fallbackCopy(txt);
+}
+function fallbackCopy(txt){
+  const ta=document.createElement('textarea');ta.value=txt;
+  ta.style.cssText='position:fixed;top:-9999px';document.body.appendChild(ta);
+  ta.select();ta.setSelectionRange(0,99999);
+  try{document.execCommand('copy');showToast('コピーしました！LINEに貼り付けてください');}
+  catch(e){showToast('コピーできませんでした');}
+  document.body.removeChild(ta);
+}
+
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+function bgClose(e,id){if(e.target===document.getElementById(id))closeModal(id);}
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+render();
+</script>
+
+
+</body></html>
