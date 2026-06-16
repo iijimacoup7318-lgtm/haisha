@@ -39,6 +39,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic',sa
 .card.dragging{opacity:0.3}
 .c1{background:#CECBF6;color:#3C3489;border-color:#AFA9EC}
 .c2{background:#9FE1CB;color:#085041;border-color:#5DCAA5}
+.c3{background:#F5C4B3;color:#712B13;border-color:#F0997B}
+.c4{background:#B5D4F4;color:#0C447C;border-color:#85B7EB}
+.c5{background:#C0DD97;color:#27500A;border-color:#97C459}
 .c6{background:#FAC775;color:#633806;border-color:#EF9F27}
 .c7{background:#F4C0D1;color:#72243E;border-color:#ED93B1}
 .c8{background:#D3D1C7;color:#2C2C2A;border-color:#B4B2A9}
@@ -119,7 +122,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic',sa
     <button class="btn-gray" style="background:#FEF3C7;border-color:#FCD34D;color:#92400E;font-weight:700" onclick="openOenModal()">🤝 応援</button>
   </div>
   <div class="action-bar" style="margin-top:-6px">
-    <button class="btn-gray" onclick="addOkusan()" style="background:#FCE4EC;border-color:#F48FB1;color:#880E4F;font-weight:700">👩 奥さん</button>
     <button class="btn-gray" onclick="openPeopleModal()">👤 人員</button>
     <button class="btn-gray" onclick="openResetModal()">🔄 リセット</button>
   </div>
@@ -261,46 +263,46 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic',sa
 
 <script>
 const DEFAULT_PEOPLE=[
-  {id:'p1', name:'玉江 清隆',   cat:'常用'},
-  {id:'p2', name:'金子 敦',     cat:'常用'},
-  {id:'p3', name:'川合 祐二',   cat:'常用'},
-  {id:'p4', name:'飯島 聖',     cat:'常用'},
-  {id:'p5', name:'野口 淳',     cat:'常用'},
-  {id:'p6', name:'渋谷 克己',   cat:'常用'},
-  {id:'p7', name:'宮畑 博次',   cat:'常用'},
-  {id:'p8', name:'柳沼 孝志',   cat:'常用'},
-  {id:'p9', name:'村田 駿',     cat:'常用'},
-  {id:'p10',name:'島田 祥秀',   cat:'常用'},
-  {id:'p11',name:'田中 健',     cat:'常用'},
-  {id:'p12',name:'久保田 雄介', cat:'常用'},
-  {id:'p13',name:'山本 孝明',   cat:'常用'},
-  {id:'p14',name:'福田 豊',     cat:'常用'},
-  {id:'p15',name:'和田 賢吾',   cat:'常用'},
-  {id:'p16',name:'八幡 行洋',   cat:'常用'},
-  {id:'p17',name:'石田 孝美',   cat:'常用'},
-  {id:'p18',name:'浅見 一郎',   cat:'一人親方'},
-  {id:'p19',name:'長谷川 勇',   cat:'一人親方'},
-  {id:'p20',name:'伊藤 八郎',   cat:'一人親方'},
-  {id:'p21',name:'ルー ミン ヒエウ①',cat:'技能実習'},
-  {id:'p22',name:'グエン バン ロイ②',cat:'技能実習'},
-  {id:'p23',name:'ホアン コン リー③',cat:'技能実習'},
-  {id:'p24',name:'アウンサン ウー④', cat:'技能実習'},
-  {id:'p25',name:'シ テウー ピョー⑤',cat:'技能実習'},
-  {id:'p26',name:'ゼイ ピョー パイン⑥',cat:'技能実習'},
-  {id:'p27',name:'ミャ ター ニィー⑦',cat:'技能実習'},
-  {id:'p28',name:'カォー ヤィン⑧',   cat:'技能実習'},
-  {id:'p29',name:'ポー ティン ジャン⑨',cat:'技能実習'},
-  {id:'p30',name:'ヘイン テッ⑩',     cat:'技能実習'},
-  {id:'p31',name:'ゾー パイン⑪',     cat:'技能実習'},
-  {id:'p32',name:'ゾー ミョー ウー⑫',cat:'技能実習'},
-  {id:'p33',name:'ピィ ティン ジョー⑬',cat:'技能実習'},
-  {id:'p34',name:'ゾー モー テゥ⑭',  cat:'技能実習'},
-  {id:'p35',name:'ゾー ナイン ウィン⑮',cat:'技能実習'},
-  {id:'p36',name:'レナルディ⑯',      cat:'技能実習'},
-  {id:'p39',name:'中田 一郎',         cat:'一人親方'},
-  {id:'p40',name:'金子 真優',         cat:'一人親方'},
-  {id:'p41',name:'中山 絢菜',         cat:'一人親方'},
-  {id:'p42',name:'根岸 千恵子',       cat:'一人親方'},
+  {id:'p1', name:'玉江',          cat:'常用',    color:'c1'},
+  {id:'p3', name:'川合',          cat:'常用',    color:'c1'},
+  {id:'p4', name:'飯島',            cat:'常用',    color:'c1'},
+  {id:'p5', name:'野口',            cat:'常用',    color:'c1'},
+  {id:'p6', name:'渋谷',          cat:'常用',    color:'c1'},
+  {id:'p7', name:'宮畑',          cat:'常用',    color:'c1'},
+  {id:'p8', name:'柳沼',          cat:'常用',    color:'c1'},
+  {id:'p9', name:'村田',            cat:'常用',    color:'c1'},
+  {id:'p10',name:'島田',          cat:'常用',    color:'c1'},
+  {id:'p11',name:'田中',            cat:'常用',    color:'c1'},
+  {id:'p12',name:'久保田',        cat:'常用',    color:'c1'},
+  {id:'p13',name:'山本',          cat:'常用',    color:'c1'},
+  {id:'p14',name:'福田',            cat:'常用',    color:'c1'},
+  {id:'p15',name:'和田',          cat:'常用',    color:'c1'},
+  {id:'p16',name:'八幡',          cat:'常用',    color:'c1'},
+  {id:'p17',name:'石田',          cat:'常用',    color:'c1'},
+  {id:'p18',name:'浅見',          cat:'一人親方',color:'c6'},
+  {id:'p19',name:'長谷川',          cat:'一人親方',color:'c6'},
+  {id:'p20',name:'伊藤',          cat:'一人親方',color:'c6'},
+  {id:'p21',name:'ヒエウ',  cat:'技能実習',color:'c2'},
+  {id:'p22',name:'ロイ',  cat:'技能実習',color:'c2'},
+  {id:'p23',name:'リー',  cat:'技能実習',color:'c2'},
+  {id:'p24',name:'ウー',   cat:'技能実習',color:'c2'},
+  {id:'p25',name:'ピョー',  cat:'技能実習',color:'c2'},
+  {id:'p26',name:'パイン',cat:'技能実習',color:'c2'},
+  {id:'p27',name:'ニィー',  cat:'技能実習',color:'c2'},
+  {id:'p28',name:'カォー',    cat:'技能実習',color:'c2'},
+  {id:'p29',name:'ジャン',cat:'技能実習',color:'c2'},
+  {id:'p30',name:'ヘイン',      cat:'技能実習',color:'c2'},
+  {id:'p31',name:'ゾー',      cat:'技能実習',color:'c2'},
+  {id:'p32',name:'ミョー',  cat:'技能実習',color:'c2'},
+  {id:'p33',name:'ジョー',cat:'技能実習',color:'c2'},
+  {id:'p34',name:'モー',   cat:'技能実習',color:'c2'},
+  {id:'p35',name:'ウィン',cat:'技能実習',color:'c2'},
+  {id:'p36',name:'レイ',       cat:'技能実習',color:'c2'},
+  {id:'p44',name:'ラカ',        cat:'技能実習',color:'c2'},
+  {id:'p39',name:'中田',          cat:'一人親方',color:'c6'},
+  {id:'p40',name:'真優',          cat:'一人親方',color:'c6'},
+  {id:'p41',name:'中山',          cat:'一人親方',color:'c6'},
+  {id:'p42',name:'根岸',        cat:'一人親方',color:'c6'},
 ];
 
 const DEFAULT_TEMPLATES=[
@@ -564,7 +566,7 @@ function addOkusan(){
     }
     return;
   }
-  state.people.push({id:'okusan',name:'飯島 とし子',cat:'一人親方'});
+  state.people.push({id:'okusan',name:'とし子',cat:'一人親方'});
   state.pool.push('okusan');
   render();
   showToast('飯島とし子を追加しました');
